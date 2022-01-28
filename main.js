@@ -73,6 +73,9 @@ function scaleParcent(start, end) {
  */
 const animationScripts = [];
 
+/**
+ * スクロールアニメーション
+ */
 animationScripts.push({
   start: 0,
   end: 40,
@@ -119,6 +122,9 @@ animationScripts.push({
   },
 });
 
+/**
+ * スクロールアニメーション開始
+ */
 function playScrollAnimation() {
   animationScripts.forEach((animation) => {
     if (scrollPercent >= animation.start && scrollPercent < animation.end) {
@@ -127,6 +133,9 @@ function playScrollAnimation() {
   });
 }
 
+/**
+ * ブラウザのスクロール率を導出
+ */
 let scrollPercent = 0;
 
 document.body.onscroll = () => {
