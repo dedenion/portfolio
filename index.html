@@ -5,54 +5,156 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3Dスクロールアニメーション</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=M+PLUS+1p"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap" rel="stylesheet">
+    //ローディング画面
+    <style>
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #040404;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: transform 1s ease-out; /* スライドアップのトランジション設定 */
+      }  
+      
+      #loading-screen h3 {
+        color:rgb(230, 233, 235);
+        opacity: 1;
+        transition: opacity 1s ease-out;
+        font-family: 'Rubik Burned', system-ui;
+      }
+      #content {
+        display: none;
+      }
+      #maru {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgb(252, 254, 255);
+        clip-path: circle(31.2% at 80% 14%);
+        z-index: 1;
+      }
+      #maru1 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgb(243, 245, 245);
+        clip-path: circle(17.2% at 14% 44%);
+        z-index: 1;
+      }
+      #maru2 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgb(224, 226, 228);
+        clip-path: circle(12.1% at 66% 73%);
+        z-index: 1;
+      }
+      .slide-up {
+        transform: translateY(-100%); /* 初期位置を画面外に設定 */
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const loadingScreen = document.getElementById('loading-screen');
+        const content = document.getElementById('content');
+        const loadingText = document.getElementById('loading-text');
+  
+        setTimeout(() => {
+          // ローディング画面のスライドアップ開始
+          loadingScreen.classList.add('slide-up');
+          
+          // コンテンツ表示開始
+          setTimeout(() => {
+            loadingScreen.style.display = 'none'; // 非表示に
+            content.style.display = 'block'; // コンテンツを表示
+          }, 1000); // スライドアップにかかる時間（1秒）
+        }, 3000);
+      });
+    </script>
+    
   </head>
   <body>
+    
     <canvas id="webgl"></canvas>
 
     <span id="scrollProgress"></span>
 
     <main>
+      <!-- ローディング画面 -->
+      <div id="loading-screen">
+        <h3 id="loading-text">Welcome<br>To My<br>Portfolio</h3>
+        <div id="maru"></div>
+        <div id="maru1"></div>
+        <div id="maru2"></div>
+      </div>
+      
       <!--<h1>My Portfolio</h1>
       <h1>This site was made by Vite + React</h1>-->
       <section>
         <h2></h2>
       </section>
       <section>
+        <div class="text-box">
         <h2>私について</h2>
         <p>名前: 重野光哉</p>
         <p>大学: 新潟大学 創生学部 創生学修課程(知能情報学科)</p>
+        </div>
       </section>
       <section>
+        <div class="text-box">
         <p>趣味: 運動</p>
+      </div>
       </section>
       <section>
+        <div class="text-box">
         <p>音楽</p>
+      </div>
       </section>
       <section>
+        <div class="text-box">
         <p>ラーメン</p>
+      </div>
       </section>
       <section>
+        <div class="text-box">
         <p>モノづくり</p>
+      </div>
       </section>
       <section>
+        <div class="text-box">
         <h2>開発成果</h2>
         <p>開発したサイトのURL</p>
+      </div>
       </section>
       <section>
+        <div class="text-box">
         <h2>研究内容</h2>
         <p>大学の研究ではこのようなことをしています。</p>
+      </div>
       </section>
       <section>
+        <div class="text-box">
         <h2>一番下にいます</h2>
         <p>立方体が自動回転しています</p>
         <p>上にスクロールしてアニメーションを反転できます</p>
+      </div>
       </section>
     </main>
 
     <script type="module" src="/main.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+      ScrollReveal({ reset: true, distance:"60px", duration:2000 });
+      ScrollReveal().reveal('.text-box', { delay: 500 });
+  </script>
   </body>
 </html>

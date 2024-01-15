@@ -124,7 +124,7 @@ textGeometry.center()
 const text = new THREE.Mesh(textGeometry, shaderMaterial)
 text.castShadow = true
 text.position.x = 0;
-text.position.y = 6;
+text.position.y = 2;
 text.position.z = -1;
 
 scene.add(text)
@@ -148,7 +148,7 @@ fontLoader.load('/fonts/DotGothic16_Regular.json', (font) => {
   const text1 = new THREE.Mesh(textGeometry, shaderMaterial)
   text1.castShadow = true
   text1.position.x = 0;
-  text1.position.y = 3;
+  text1.position.y = -1;
   text1.position.z = -1;
   
   scene.add(text1)
@@ -159,7 +159,7 @@ fontLoader.load('/fonts/DotGothic16_Regular.json', (font) => {
 
 //3Dオブジェクトの追加
 let earth;
-let ramen;
+let tv;
 
 const gltfLoader = new GLTFLoader();
 gltfLoader.load("./textures/earth/scene.gltf", (gltf) => {
@@ -168,14 +168,16 @@ gltfLoader.load("./textures/earth/scene.gltf", (gltf) => {
   earth.position.x = 0;
   earth.position.y = 0.3;
   earth.position.z = -15;
-  scene.add(earth);
+  //scene.add(earth);
 });
 
 gltfLoader.load("./textures/work/scene.gltf", (gltf) => {
-  ramen = gltf.scene;
-  ramen.position.set(3,3,3);
-  ramen.scale.set(3,3,3);
-  //scene.add(ramen);
+  tv = gltf.scene;
+  tv.position.set(2,0,-10);
+  tv.scale.set(5,5,5);
+  scene.add(tv);
+  // Y軸周りに90度回転
+  //ramen.rotation.y = Math.PI / -2;
 });
 
 

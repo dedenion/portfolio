@@ -14,6 +14,7 @@ body {
 
 canvas {
   position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
 }
@@ -34,4 +35,9 @@ section {
   min-height: 100vh;
   padding: 20px;
   font-size: 1.5rem;
+}
+
+
+.text-box {
+  
 }
