@@ -15,6 +15,25 @@ const sizes = {
   height: window.innerHeight,
 };
 
+// ウィンドウのリサイズ時に呼び出す関数
+const handleResize = () => {
+  sizes.width = window.innerWidth;
+  sizes.height = window.innerHeight;
+
+  camera.aspect = sizes.width / sizes.height;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+};
+
+// ページ読み込み時に実行する関数
+const onPageLoad = () => {
+  handleResize(); // 初回実行時にサイズ設定
+  window.scrollTo({ top: 0, behavior: "smooth" }); // ページ一番上にスクロール
+};
+
+
 // Scene
 const scene = new THREE.Scene();
 
@@ -261,7 +280,6 @@ animationScripts.push({
 
 
 
-
 /**
  * スクロールアニメーション開始
  */
@@ -272,6 +290,14 @@ function playScrollAnimation() {
     }
   });
 }
+
+
+// ウィンドウのリサイズイベントリスナーの追加
+window.addEventListener("resize", handleResize);
+
+// ページ読み込み時に onPageLoad を実行
+window.addEventListener("load", onPageLoad);
+
 
 /**
  * ブラウザのスクロール率を導出
@@ -299,18 +325,13 @@ const tick = () => {
   renderer.render(scene, camera);
 };
 
-tick();
 
-//ブラウザのリサイズ操作
-window.addEventListener("resize", () => {
-  sizes.width = window.innerWidth;
-  sizes.height = window.innerHeight;
 
-  camera.aspect = sizes.width / sizes.height;
-  camera.updateProjectionMatrix();
 
-  renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-});
 
+
+// 初回実行
+handleResize();
+onPageLoad();
 window.scrollTo({ top: 0, behavior: "smooth" });
+tick();
