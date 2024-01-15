@@ -26,8 +26,9 @@ main {
   justify-content: center;
   text-align: center;
   font-size: 2rem;
-  margin-top: 100px;
+  margin-top: 200px;
 }
+
 
 section {
   min-height: 100vh;
