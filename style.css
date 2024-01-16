@@ -18,6 +18,18 @@ canvas {
   left: 0;
 }
 
+#percent, #scroll {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 30px;
+  
+}
+#scroll {
+  top: 40px;
+  color: #676767;
+}
+
 main {
   position: absolute;
   width: 100vw;
@@ -37,6 +49,3 @@ section {
 }
 
 
-.text-box {
-  
-}

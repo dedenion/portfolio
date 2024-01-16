@@ -6,9 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3Dスクロールアニメーション</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap"
+      rel="stylesheet">
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <script type="module" src="/main.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      ScrollReveal({ reset: true, distance:"60px", duration:2000 });
+      ScrollReveal().reveal('.text-box', { delay: 600 });
+  </script>
     //ローディング画面
     <style>
       #loading-screen {
@@ -115,13 +126,20 @@ gsap.to(loadingScreen, {
     loadingScreen.style.display = 'none';
   }
 });
-    }, 5000);
+    }, 3000);
   });
 </script>
-    
+
   </head>
-  <body>
-    
+  <body><script>
+    $(function() {
+      $('html,body').animate({
+        scrollTop: 0
+      });
+    });
+
+  </script>
+
     <canvas id="webgl"></canvas>
 
     <span id="scrollProgress"></span>
@@ -134,7 +152,9 @@ gsap.to(loadingScreen, {
         <div id="maru1"></div>
         <div id="maru2"></div>
       </div>
-      
+      <p id="percent">0</p>
+      <p id="scroll">0</p>
+
       <!--<h1>My Portfolio</h1>
       <h1>This site was made by Vite + React</h1>-->
       <section>
@@ -142,57 +162,40 @@ gsap.to(loadingScreen, {
       </section>
       <section>
         <div class="text-box">
-        <h2>私について</h2>
-        <p>名前: 重野光哉</p>
-        <p>大学: 新潟大学 創生学部 創生学修課程(知能情報学科)</p>
+          <h2>私について</h2>
+          <p>名前: 重野光哉</p>
+          <p>大学: 新潟大学 創生学部 創生学修課程(知能情報学科)</p>
         </div>
       </section>
       <section>
         <div class="text-box">
-        <h2>趣味: 運動</h2>
-      </div>
+          <h2>趣味: 映画鑑賞、音楽、運動、モノづくり</h2>
+        </div>
       </section>
       <section>
         <div class="text-box">
-        <h2>音楽</h2>
-      </div>
+          <h2>開発成果</h2>
+          <p>開発したサイトのURL</p>
+        </div>
       </section>
       <section>
         <div class="text-box">
-        <h2>ラーメン</h2>
-      </div>
+          <h2>研究内容</h2>
+          <p>大学の研究ではこのようなことをしています。</p>
+        </div>
       </section>
       <section>
         <div class="text-box">
-        <h2>モノづくり</h2>
-      </div>
-      </section>
-      <section>
-        <div class="text-box">
-        <h2>開発成果</h2>
-        <p>開発したサイトのURL</p>
-      </div>
-      </section>
-      <section>
-        <div class="text-box">
-        <h2>研究内容</h2>
-        <p>大学の研究ではこのようなことをしています。</p>
-      </div>
-      </section>
-      <section>
-        <div class="text-box">
-        <h2>一番下にいます</h2>
-        <p>立方体が自動回転しています</p>
-        <p>上にスクロールしてアニメーションを反転できます</p>
-      </div>
+          <h2>一番下にいます</h2>
+          <p>立方体が自動回転しています</p>
+          <p>上にスクロールしてアニメーションを反転できます</p>
+        </div>
       </section>
     </main>
-
-    <script type="module" src="/main.js"></script>
-    <script src="https://unpkg.com/scrollreveal"></script>
     <script>
       ScrollReveal({ reset: true, distance:"60px", duration:2000 });
       ScrollReveal().reveal('.text-box', { delay: 600 });
   </script>
+
   </body>
 </html>
