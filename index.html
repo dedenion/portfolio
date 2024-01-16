@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
     //ローディング画面
     <style>
       #loading-screen {
@@ -23,12 +24,16 @@
         z-index: 9999;
         opacity: 1;
         transition: transform 1s ease-out; /* スライドアップのトランジション設定 */
+        perspective: 1000px; /* 透視効果を加えるための視点の距離 */
       }  
       
       #loading-screen h3 {
         color:rgb(230, 233, 235);
         opacity: 1;
         transition: opacity 1s ease-out;
+        transform-style: preserve-3d; /* 子要素も3D変換を有効にする */
+      transform-origin: center;
+      transform: translateZ(0); /* 子要素が3D変換されるためには、親要素も3D変換を持つ必要がある。 */
         /*font-family: 'Rubik Burned', system-ui;*/
       }
       #content {
@@ -41,6 +46,9 @@
         background: rgb(252, 254, 255);
         clip-path: circle(31.2% at 80% 14%);
         z-index: 1;
+        transform-style: preserve-3d; /* 子要素も3D変換を有効にする */
+      transform-origin: center;
+      transform: translateZ(0); /* 子要素が3D変換されるためには、親要素も3D変換を持つ必要がある。 */
       }
       #maru1 {
         position: absolute;
@@ -49,6 +57,9 @@
         background: rgb(243, 245, 245);
         clip-path: circle(17.2% at 14% 44%);
         z-index: 1;
+        transform-style: preserve-3d; /* 子要素も3D変換を有効にする */
+      transform-origin: center;
+      transform: translateZ(0); /* 子要素が3D変換されるためには、親要素も3D変換を持つ必要がある。 */
       }
       #maru2 {
         position: absolute;
@@ -57,29 +68,56 @@
         background: rgb(224, 226, 228);
         clip-path: circle(12.1% at 66% 73%);
         z-index: 1;
+        transform-style: preserve-3d; /* 子要素も3D変換を有効にする */
+      transform-origin: center;
+      transform: translateZ(0); /* 子要素が3D変換されるためには、親要素も3D変換を持つ必要がある。 */
       }
       .slide-up {
         transform: translateY(-100%); /* 初期位置を画面外に設定 */
       }
     </style>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const loadingScreen = document.getElementById('loading-screen');
-        const content = document.getElementById('content');
-        const loadingText = document.getElementById('loading-text');
+      function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
   
-        setTimeout(() => {
-          // ローディング画面のスライドアップ開始
-          loadingScreen.classList.add('slide-up');
-          
-          // コンテンツ表示開始
-          setTimeout(() => {
-            loadingScreen.style.display = 'none'; // 非表示に
-            content.style.display = 'block'; // コンテンツを表示
-          }, 1000); // スライドアップにかかる時間（1秒）
-        }, 3000);
-      });
-    </script>
+      function updateColor() {
+        gsap.to('#loading-text', { color: getRandomColor(), duration: 1 });
+        gsap.to('#maru', { backgroundColor: getRandomColor(), duration: 1 });
+        gsap.to('#maru1', { backgroundColor: getRandomColor(), duration: 1 });
+        gsap.to('#maru2', { backgroundColor: getRandomColor(), duration: 1 });
+      }
+  
+      setInterval(updateColor, 1000);
+  document.addEventListener("DOMContentLoaded", function () {
+    const loadingScreen = document.getElementById('loading-screen');
+    const content = document.getElementById('content');
+    
+    // GSAP アニメーションの設定
+gsap.fromTo('#maru', { clipPath: 'circle(0% at 80% 14%)' }, { clipPath: 'circle(31.2% at 80% 14%)', duration: 1, ease: 'power2.inOut' });
+gsap.fromTo('#maru1', { clipPath: 'circle(0% at 14% 44%)' }, { clipPath: 'circle(17.2% at 14% 44%)', duration: 1, ease: 'power2.inOut' });
+gsap.fromTo('#maru2', { clipPath: 'circle(0% at 66% 73%)' }, { clipPath: 'circle(12.1% at 66% 73%)', duration: 1, ease: 'power2.inOut' });
+gsap.fromTo('#loading-screen h3', { opacity: 0, fontSize: '10px' }, { opacity: 1, fontSize: '30px', duration: 1, ease: 'power2.inOut' });
+
+    setTimeout(() => {
+      // ローディング画面をフェードアウトするアニメーション
+gsap.to(loadingScreen, {
+  opacity: 0,
+  duration: 1,
+  ease: "power2.inOut",
+  onComplete: () => {
+    // アニメーションが完了したら非表示にする
+    loadingScreen.style.display = 'none';
+  }
+});
+    }, 5000);
+  });
+</script>
     
   </head>
   <body>
@@ -154,7 +192,7 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script>
       ScrollReveal({ reset: true, distance:"60px", duration:2000 });
-      ScrollReveal().reveal('.text-box', { delay: 1000 });
+      ScrollReveal().reveal('.text-box', { delay: 600 });
   </script>
   </body>
 </html>

@@ -3,6 +3,9 @@ import * as THREE from "three";
 import {GLTFLoader} from "./public/loaders/GLTFLoader"
 import { FontLoader } from "./public/threefonts/FontLoader"
 import { TextGeometry } from "./public/threefonts/TextGeometry"
+// TweenMax ライブラリをインポート
+import { TweenMax } from 'gsap';
+
 /**
  * 必須の3要素
  */
@@ -50,8 +53,8 @@ scene.add(light);
 /**
  * GridHelperの設定
  */
-/*const gridHelper = new THREE.GridHelper(30, 30);
-scene.add(gridHelper);*/
+const gridHelper = new THREE.GridHelper(30, 30);
+scene.add(gridHelper);
 
 
 
