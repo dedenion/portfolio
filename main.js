@@ -272,9 +272,9 @@ function init() {
 
   gltfLoader.load("./textures/earth/scene.gltf", (gltf) => {
     earth = gltf.scene;
-    earth.scale.set(250, 250, 250);
+    earth.scale.set(200, 200, 200);
     earth.rotation.set(0, 0, 0);
-    earth.position.set(53, 150, -10);
+    earth.position.set(53, 150, -50);
     scene.add(earth);
 
      // アニメーションコード
