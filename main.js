@@ -243,6 +243,7 @@ function init() {
   let tv;
   let banana;
   let ramen;
+  let banana1;
 
   const gltfLoader = new GLTFLoader();
   gltfLoader.load("./textures/ramen/scene.gltf", (gltf) => {
@@ -267,7 +268,15 @@ function init() {
     banana.scale.set(50, 50, 50);
     banana.position.set(53, -80, -100);
     scene.add(banana);
-    gsap.to(banana.rotation, { duration: 200, y: Math.PI * -2, repeat: -1, ease: "linear" });
+    gsap.to(banana.rotation, { duration: 200, y: Math.PI * -4, repeat: -1, ease: "linear" });
+  });
+
+  gltfLoader.load("./textures/banana/scene.gltf", (gltf) => {
+    banana1 = gltf.scene;
+    banana1.scale.set(28, 28, 28);
+    banana1.position.set(53, -100, -100);
+    scene.add(banana1);
+    gsap.to(banana1.rotation, { duration: 100, y: Math.PI * 4, repeat: -1, ease: "linear" });
   });
 
   gltfLoader.load("./textures/earth/scene.gltf", (gltf) => {

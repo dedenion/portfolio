@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -86,6 +86,10 @@
       .slide-up {
         transform: translateY(-100%); /* 初期位置を画面外に設定 */
       }
+
+
+
+      
     </style>
     <script>
       function getRandomColor() {
@@ -113,6 +117,9 @@
 gsap.fromTo('#maru', { clipPath: 'circle(0% at 80% 14%)' }, { clipPath: 'circle(31.2% at 80% 14%)', duration: 1, ease: 'power2.inOut' });
 gsap.fromTo('#maru1', { clipPath: 'circle(0% at 14% 44%)' }, { clipPath: 'circle(17.2% at 14% 44%)', duration: 1, ease: 'power2.inOut' });
 gsap.fromTo('#maru2', { clipPath: 'circle(0% at 66% 73%)' }, { clipPath: 'circle(12.1% at 66% 73%)', duration: 1, ease: 'power2.inOut' });
+
+
+
 gsap.fromTo('#loading-screen h3', { opacity: 0, fontSize: '10px' }, { opacity: 1, fontSize: '30px', duration: 1, ease: 'power2.inOut' });
 
     setTimeout(() => {
@@ -156,7 +163,12 @@ gsap.to(loadingScreen, {
       </div>
       <p id="percent">0</p>
       <p id="scroll">0</p>
-      <button id="scrollButton" onclick="toggleAutoScroll()">Toggle Auto Scroll</button>
+      <div class="toggle-button" onclick="toggleAutoScroll()">
+        <div class="ripple"></div>
+        <div class="slider">
+        </div>
+      </div>
+      
 
       <!--<h1>My Portfolio</h1>
       <h1>This site was made by Vite + React</h1>-->
@@ -200,7 +212,7 @@ gsap.to(loadingScreen, {
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         // ScrollRevealの初期化
-        ScrollReveal({ reset: true, distance: "80px", duration: 6000 });
+        ScrollReveal({ reset: true, distance: "80px", duration: 9000 });
       
         // .fade-in クラスを持つ要素をフェードインさせる
         ScrollReveal().reveal('.fade-in', { delay: 1400 });
@@ -211,16 +223,19 @@ gsap.to(loadingScreen, {
 let scrollInterval;
 
 function toggleAutoScroll() {
+  const toggleButton = document.querySelector('.toggle-button');
   if (isAutoScrolling) {
     stopAutoScroll();
+    toggleButton.classList.remove('active');
   } else {
     startAutoScroll();
+    toggleButton.classList.add('active');
   }
 }
 
 function startAutoScroll() {
   isAutoScrolling = true;
-  scrollInterval = setInterval(scrollPage, 20); // 20ミリ秒ごとにscrollPage関数を実行
+  scrollInterval = setInterval(scrollPage, 20);
 }
 
 function stopAutoScroll() {
@@ -229,16 +244,15 @@ function stopAutoScroll() {
 }
 
 function scrollPage() {
-  // スクロールの速度や他の設定を調整する場合はここを変更
-  window.scrollBy(0, 2); // 縦方向へのスクロール量を調整
+  window.scrollBy(0, 2);
 }
 
-// 必要に応じてページが読み込まれたときに実行する処理を追加する
 document.addEventListener("DOMContentLoaded", function () {
-  // ここに初期化などの処理を追加
+  // 初期化などの処理があればここに追加
 });
 
   </script>
+
 
   </body>
 </html>
