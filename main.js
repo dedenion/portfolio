@@ -83,6 +83,10 @@ function easeOutQuad(x) {
   return -c * (t /= d) * (t - 2) + b;
 }
 
+// カメラの速度と加速度の初期値
+let cameraVelocity = new THREE.Vector3();
+const cameraAcceleration = new THREE.Vector3(0, -0.1, 0); // ここではy軸方向に加速
+
 // 慣性スクロールの値
 let inertialScroll = 0;
 // 慣性スクロールのパーセント値(0~100)
@@ -108,7 +112,7 @@ const animationScripts = [
       );
       camera.rotation.x = lerp(
         0,
-        -Math.PI / 2, scalePercent(25, 50)
+        Math.PI / 2, scalePercent(25, 50)
       );
     }
   },
@@ -121,7 +125,7 @@ const animationScripts = [
       );
       camera.rotation.y = lerp(
         0,
-        -Math.PI / 2, scalePercent(50, 75)
+        Math.PI / 2, scalePercent(50, 75)
       );
     }
   },
@@ -185,8 +189,8 @@ function init() {
   fontLoader.load('/fonts/DotGothic16_Regular.json', (font) => {
     const textGeometry = new TextGeometry("My", {
       font: font,
-      size: 1.5,
-      height: 0.2,
+      size: 2.5,
+      height: 0.5,
       curveSegments: 12,
       bevelEnabled: true,
       bevelThickness: 0.03,
@@ -200,17 +204,18 @@ function init() {
     const text = new THREE.Mesh(textGeometry, shaderMaterial)
     text.castShadow = true
     text.position.x = 50;
-    text.position.y = 53;
+    text.position.y = 54;
     text.position.z = 37;
 
     scene.add(text)
+    gsap.to(text.scale, { duration: 3, x: 0.8, y: 0.8, z: 0.8, yoyo: true, repeat: -1, ease: "power1.inOut" });
   })
 
   fontLoader.load('/fonts/DotGothic16_Regular.json', (font) => {
     const textGeometry = new TextGeometry("Portfolio", {
       font: font,
-      size: 1.5,
-      height: 0.2,
+      size: 2.5,
+      height: 0.5,
       curveSegments: 12,
       bevelEnabled: true,
       bevelThickness: 0.03,
@@ -228,6 +233,7 @@ function init() {
     text1.position.z = 39;
 
     scene.add(text1)
+    gsap.to(text1.scale, { duration: 3, x: 0.8, y: 0.8, z: 0.8, yoyo: true, repeat: -1, ease: "power1.inOut" });
   })
 
 
@@ -235,24 +241,46 @@ function init() {
   //3Dオブジェクトの追加
   let earth;
   let tv;
+  let banana;
+  let ramen;
 
   const gltfLoader = new GLTFLoader();
-  gltfLoader.load("./textures/earth/scene.gltf", (gltf) => {
-    earth = gltf.scene;
-    earth.scale.set(0.02, 0.02, 0.02);
-    earth.position.set(53, 48, 14);
-    scene.add(earth);
+  gltfLoader.load("./textures/ramen/scene.gltf", (gltf) => {
+    ramen = gltf.scene;
+    ramen.scale.set(200, 200, 200);
+    ramen.position.set(80, -200, 80);
+    //scene.add(ramen);
   });
 
   gltfLoader.load("./textures/work/scene.gltf", (gltf) => {
     tv = gltf.scene;
     // モデルを適切に整列させるために回転を設定する
     tv.rotation.set(0, 0, 0); // 必要に応じてオイラー角を調整
-    tv.position.set(51, 50, 10);
-    tv.scale.set(7, 7, 7);
+    tv.position.set(200, 50, -23);
+    tv.scale.set(100, 100, 100);
 
-    scene.add(tv);
+    //scene.add(tv);
   });
+
+  gltfLoader.load("./textures/banana/scene.gltf", (gltf) => {
+    banana = gltf.scene;
+    banana.scale.set(50, 50, 50);
+    banana.position.set(53, -80, -100);
+    scene.add(banana);
+    gsap.to(banana.rotation, { duration: 200, y: Math.PI * -2, repeat: -1, ease: "linear" });
+  });
+
+  gltfLoader.load("./textures/earth/scene.gltf", (gltf) => {
+    earth = gltf.scene;
+    earth.scale.set(250, 250, 250);
+    earth.rotation.set(0, 0, 0);
+    earth.position.set(53, 150, -10);
+    scene.add(earth);
+
+     // アニメーションコード
+     gsap.to(earth.rotation, { duration: 100, y: Math.PI * 2, repeat: -1, ease: "linear" });
+});
+
 
 
 

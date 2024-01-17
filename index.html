@@ -129,16 +129,18 @@ gsap.to(loadingScreen, {
     }, 3000);
   });
 </script>
+<script>
+  $(function() {
+    $('html,body').animate({
+      scrollTop: 0
+    });
+  });
+
+</script>
+
 
   </head>
-  <body><script>
-    $(function() {
-      $('html,body').animate({
-        scrollTop: 0
-      });
-    });
-
-  </script>
+  <body>
 
     <canvas id="webgl"></canvas>
 
@@ -154,6 +156,7 @@ gsap.to(loadingScreen, {
       </div>
       <p id="percent">0</p>
       <p id="scroll">0</p>
+      <button id="scrollButton" onclick="toggleAutoScroll()">Toggle Auto Scroll</button>
 
       <!--<h1>My Portfolio</h1>
       <h1>This site was made by Vite + React</h1>-->
@@ -161,40 +164,80 @@ gsap.to(loadingScreen, {
         <h2></h2>
       </section>
       <section>
-        <div class="text-box">
+        <div class="text-box fade-in">
           <h2>私について</h2>
           <p>名前: 重野光哉</p>
           <p>大学: 新潟大学 創生学部 創生学修課程(知能情報学科)</p>
         </div>
       </section>
       <section>
-        <div class="text-box">
+        <div class="text-box fade-in">
           <h2>趣味: 映画鑑賞、音楽、運動、モノづくり</h2>
         </div>
       </section>
       <section>
-        <div class="text-box">
+        <div class="text-box fade-in">
           <h2>開発成果</h2>
           <p>開発したサイトのURL</p>
         </div>
       </section>
       <section>
-        <div class="text-box">
+        <div class="text-box fade-in">
           <h2>研究内容</h2>
           <p>大学の研究ではこのようなことをしています。</p>
         </div>
       </section>
       <section>
-        <div class="text-box">
+        <div class="text-box fade-in">
           <h2>一番下にいます</h2>
           <p>立方体が自動回転しています</p>
           <p>上にスクロールしてアニメーションを反転できます</p>
         </div>
       </section>
+
+
     </main>
     <script>
-      ScrollReveal({ reset: true, distance:"60px", duration:2000 });
-      ScrollReveal().reveal('.text-box', { delay: 600 });
+      document.addEventListener("DOMContentLoaded", function() {
+        // ScrollRevealの初期化
+        ScrollReveal({ reset: true, distance: "80px", duration: 6000 });
+      
+        // .fade-in クラスを持つ要素をフェードインさせる
+        ScrollReveal().reveal('.fade-in', { delay: 1400 });
+      });
+  </script>
+  <script>
+    let isAutoScrolling = false;
+let scrollInterval;
+
+function toggleAutoScroll() {
+  if (isAutoScrolling) {
+    stopAutoScroll();
+  } else {
+    startAutoScroll();
+  }
+}
+
+function startAutoScroll() {
+  isAutoScrolling = true;
+  scrollInterval = setInterval(scrollPage, 20); // 20ミリ秒ごとにscrollPage関数を実行
+}
+
+function stopAutoScroll() {
+  isAutoScrolling = false;
+  clearInterval(scrollInterval);
+}
+
+function scrollPage() {
+  // スクロールの速度や他の設定を調整する場合はここを変更
+  window.scrollBy(0, 2); // 縦方向へのスクロール量を調整
+}
+
+// 必要に応じてページが読み込まれたときに実行する処理を追加する
+document.addEventListener("DOMContentLoaded", function () {
+  // ここに初期化などの処理を追加
+});
+
   </script>
 
   </body>

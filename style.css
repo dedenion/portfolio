@@ -30,6 +30,16 @@ canvas {
   color: #676767;
 }
 
+#scrollButton {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  font-size: 10px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+
 main {
   position: absolute;
   width: 100vw;
