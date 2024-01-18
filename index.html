@@ -48,6 +48,21 @@ gsap.to(loadingScreen, {
     });
   });
 
+
+// ホバー時のテキスト表示関数
+function showHoverText() {
+  var hoverText = document.getElementById('hoverText');
+  hoverText.style.display = 'block';
+}
+
+// ホバー終了時のテキスト非表示関数
+function hideHoverText() {
+  var hoverText = document.getElementById('hoverText');
+  hoverText.style.display = 'none';
+}
+
+
+
 </script>
 
 
@@ -75,11 +90,14 @@ gsap.to(loadingScreen, {
 
       <p id="percent">0</p>
       <p id="scroll">0</p>
-      <div class="toggle-button" onclick="toggleAutoScroll()">
+      <div class="toggle-button" onmouseover="showHoverText()" onmouseout="hideHoverText()" onclick="toggleAutoScroll()">
         <div class="ripple"></div>
-        <div class="slider">
-        </div>
+        <div class="slider"></div>
+        <div class="hover-text" id="hoverText">Auto<br>Scroll</div>
       </div>
+      
+      
+      
       
 
       <!--<h1>My Portfolio</h1>
@@ -125,22 +143,33 @@ gsap.to(loadingScreen, {
       <section>
         <div class="text-box fade-in">
           <h2>ポートフォリオの制作背景</h2>
-          <p>ダイナミックさを重点に、Three.jsの練習も兼ねて作成しました。</p>
+          <p>Three.jsの練習を兼ねて作成しました。</p>
           <p>今回は個人的に取り入れたい機能を詰め合わせたようなものなので、<br>
           次に何か作る際は、UIやUxなどにより気を配り、<br>
           わかりやすくデザイン性の優れたサイトを作成したいです。</p>
         </div>
       </section>
 
+      <button class="gotop fade-in" onclick="goToTop()">TOP</button>
+
 
     </main>
     <script>
+      
+        function goToTop() {
+          // ページをリロードする
+          location.reload();
+        }
+      </script>
+      
+      
+    <script>
       document.addEventListener("DOMContentLoaded", function() {
         // ScrollRevealの初期化
-        ScrollReveal({ reset: true, distance: "80px", duration: 9000 });
+        ScrollReveal({ reset: true, distance: "80px", duration: 6000 });
       
         // .fade-in クラスを持つ要素をフェードインさせる
-        ScrollReveal().reveal('.fade-in', { delay: 1400 });
+        ScrollReveal().reveal('.fade-in', { delay: 3000 });
       });
   </script>
   <script>

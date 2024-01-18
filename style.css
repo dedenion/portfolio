@@ -18,17 +18,19 @@ canvas {
   left: 0;
 }
 
-#percent, #scroll {
+#percent,
+#scroll {
   position: fixed;
   top: 0;
   left: 0;
-  font-size: 30px;
-  color: rgba(78, 105, 147, 0.3);
-  
+  font-size: 10px;
+  color: rgba(193, 199, 209, 0.3);
+  text-shadow: 6px 3px 3px #0c0b0b;
 }
+
 #scroll {
-  top: 40px;
-  color: rgba(78, 105, 147, 0.3);
+  top: 20px;
+  color: rgba(190, 206, 231, 0.3);
 }
 
 
@@ -43,6 +45,11 @@ main {
   text-align: center;
   font-size: 2rem;
   margin-top: 200px;
+  text-shadow: 2px 2px 3px gray,
+    
+    
+    4px -2px 3px gray;
+
 }
 
 
@@ -52,14 +59,19 @@ section {
   font-size: 1.5rem;
 }
 
+a {
+  color: aliceblue;
+}
+
 
 .toggle-button {
   position: fixed;
-  top: 100px;
+  top: 40px;
   left: 0;
-  width: 50px;
-  height: 25px;
-  background-color: rgba(78, 105, 147, 0.3); /* 半透明の白色 */
+  width: 80px; /* サイズを大きく */
+  height: 40px; /* サイズを大きく */
+  background-color: rgba(168, 181, 202, 0.3);
+  /* 半透明の白色 */
   border-radius: 25px;
   cursor: pointer;
   overflow: hidden;
@@ -71,7 +83,7 @@ section {
   position: absolute;
   top: 0;
   left: 0;
-  background: radial-gradient(circle, transparent 20%, rgba(56, 93, 116, 0.5) 50%);
+  background: radial-gradient(circle, transparent 20%, rgba(142, 168, 185, 0.5) 50%);
   transform: scale(0);
   animation: rippleAnimation 0.6s linear;
 }
@@ -84,9 +96,9 @@ section {
 }
 
 .slider {
-  width: 25px;
-  height: 25px;
-  background-color: #1f303b;
+  width: 40px; /* スライダーサイズを大きく */
+  height: 40px; /* スライダーサイズを大きく */
+  background-color: rgba(143, 155, 163, 0.5); /* 透明度を微調整 */
   border-radius: 50%;
   position: absolute;
   top: 0;
@@ -95,8 +107,44 @@ section {
 }
 
 .toggle-button.active .slider {
-  transform: translateX(25px);
+  transform: translateX(40px); /* スライダーがボタン内で移動する距離を調整 */
 }
+
+
+/* ホバー時のテキストの初期設定（非表示） */
+.toggle-button .hover-text {
+  display: none;
+  color: #e7e4ea;
+  text-shadow: 4px 2px 3px rgb(60, 60, 61);
+  font-size: 0.4em; /* ボタンサイズに合わせて調整 */
+}
+
+.toggle-button:hover .hover-text {
+  display: block;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+
+/* ホバー時のスタイル */
+.toggle-button:hover #hoverText {
+  display: block;
+  animation: fadeIn 0.5s ease-in-out;
+}
+/* 任意のアニメーションを追加 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ホバー時のアニメーション設定 */
+#hoverText {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
 
 /*ローディング画面*/
 #loading-screen {
@@ -111,196 +159,237 @@ section {
   align-items: center;
   z-index: 9999;
   opacity: 1;
-  transition: transform 1s ease-out; /* スライドアップのトランジション設定 */
-  perspective: 1000px; /* 透視効果を加えるための視点の距離 */
-}  
+  transition: transform 1s ease-out;
+  /* スライドアップのトランジション設定 */
+  perspective: 1000px;
+  /* 透視効果を加えるための視点の距離 */
+}
 
 #load {
-  position:absolute;
-  width:600px;
-  height:36px;
-  left:50%;
-  top:40%;
-  margin-left:-300px;
-  overflow:visible;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
-  cursor:default;
+  position: absolute;
+  width: 600px;
+  height: 36px;
+  left: 50%;
+  top: 40%;
+  margin-left: -300px;
+  overflow: visible;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
   opacity: 1;
-        transition: opacity 1s ease-out;
-        transform-style: preserve-3d; /* 子要素も3D変換を有効にする */
-      transform-origin: center;
-      transform: translateZ(1);
+  transition: opacity 1s ease-out;
+  transform-style: preserve-3d;
+  /* 子要素も3D変換を有効にする */
+  transform-origin: center;
+  transform: translateZ(1);
 }
 
 #load div {
-  position:absolute;
-  width:20px;
-  height:36px;
-  opacity:0;
-  font-family:Helvetica, Arial, sans-serif;
-  animation:move 2s linear infinite;
-  -o-animation:move 2s linear infinite;
-  -moz-animation:move 2s linear infinite;
-  -webkit-animation:move 2s linear infinite;
-  transform:rotate(180deg);
-  -o-transform:rotate(180deg);
-  -moz-transform:rotate(180deg);
-  -webkit-transform:rotate(180deg);
-  color:#a4e0f3;
+  position: absolute;
+  width: 20px;
+  height: 36px;
+  opacity: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  animation: move 2s linear infinite;
+  -o-animation: move 2s linear infinite;
+  -moz-animation: move 2s linear infinite;
+  -webkit-animation: move 2s linear infinite;
+  transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  color: #a4e0f3;
+  text-shadow: 6px 5px 2px rgb(82, 92, 199);
 }
 
 #load div:nth-child(2) {
-  animation-delay:0.2s;
-  -o-animation-delay:0.2s;
-  -moz-animation-delay:0.2s;
-  -webkit-animation-delay:0.2s;
+  animation-delay: 0.2s;
+  -o-animation-delay: 0.2s;
+  -moz-animation-delay: 0.2s;
+  -webkit-animation-delay: 0.2s;
 }
+
 #load div:nth-child(3) {
-  animation-delay:0.4s;
-  -o-animation-delay:0.4s;
-  -webkit-animation-delay:0.4s;
-  -webkit-animation-delay:0.4s;
+  animation-delay: 0.4s;
+  -o-animation-delay: 0.4s;
+  -webkit-animation-delay: 0.4s;
+  -webkit-animation-delay: 0.4s;
 }
+
 #load div:nth-child(4) {
-  animation-delay:0.6s;
-  -o-animation-delay:0.6s;
-  -moz-animation-delay:0.6s;
-  -webkit-animation-delay:0.6s;
+  animation-delay: 0.6s;
+  -o-animation-delay: 0.6s;
+  -moz-animation-delay: 0.6s;
+  -webkit-animation-delay: 0.6s;
 }
+
 #load div:nth-child(5) {
-  animation-delay:0.8s;
-  -o-animation-delay:0.8s;
-  -moz-animation-delay:0.8s;
-  -webkit-animation-delay:0.8s;
+  animation-delay: 0.8s;
+  -o-animation-delay: 0.8s;
+  -moz-animation-delay: 0.8s;
+  -webkit-animation-delay: 0.8s;
 }
+
 #load div:nth-child(6) {
-  animation-delay:1s;
-  -o-animation-delay:1s;
-  -moz-animation-delay:1s;
-  -webkit-animation-delay:1s;
+  animation-delay: 1s;
+  -o-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  -webkit-animation-delay: 1s;
 }
+
 #load div:nth-child(7) {
-  animation-delay:1.2s;
-  -o-animation-delay:1.2s;
-  -moz-animation-delay:1.2s;
-  -webkit-animation-delay:1.2s;
+  animation-delay: 1.2s;
+  -o-animation-delay: 1.2s;
+  -moz-animation-delay: 1.2s;
+  -webkit-animation-delay: 1.2s;
 }
 
 @keyframes move {
   0% {
-    left:0;
-    opacity:0;
+    left: 0;
+    opacity: 0;
   }
+
   35% {
-    left: 41%; 
-    -moz-transform:rotate(0deg);
-    -webkit-transform:rotate(0deg);
-    -o-transform:rotate(0deg);
-    transform:rotate(0deg);
-    opacity:1;
+    left: 41%;
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    opacity: 1;
   }
+
   65% {
-    left:59%; 
-    -moz-transform:rotate(0deg); 
-    -webkit-transform:rotate(0deg); 
-    -o-transform:rotate(0deg);
-    transform:rotate(0deg); 
-    opacity:1;
+    left: 59%;
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    opacity: 1;
   }
+
   100% {
-    left:100%; 
-    -moz-transform:rotate(-180deg); 
-    -webkit-transform:rotate(-180deg); 
-    -o-transform:rotate(-180deg); 
-    transform:rotate(-180deg);
-    opacity:0;
+    left: 100%;
+    -moz-transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    opacity: 0;
   }
 }
 
 @-moz-keyframes move {
   0% {
-    left:0; 
-    opacity:0;
+    left: 0;
+    opacity: 0;
   }
+
   35% {
-    left:41%; 
-    -moz-transform:rotate(0deg); 
-    transform:rotate(0deg);
-    opacity:1;
+    left: 41%;
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+    opacity: 1;
   }
+
   65% {
-    left:59%; 
-    -moz-transform:rotate(0deg); 
-    transform:rotate(0deg);
-    opacity:1;
+    left: 59%;
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+    opacity: 1;
   }
+
   100% {
-    left:100%; 
-    -moz-transform:rotate(-180deg); 
-    transform:rotate(-180deg);
-    opacity:0;
+    left: 100%;
+    -moz-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    opacity: 0;
   }
 }
 
 @-webkit-keyframes move {
   0% {
-    left:0; 
-    opacity:0;
+    left: 0;
+    opacity: 0;
   }
+
   35% {
-    left:41%; 
-    -webkit-transform:rotate(0deg); 
-    transform:rotate(0deg); 
-    opacity:1;
+    left: 41%;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    opacity: 1;
   }
+
   65% {
-    left:59%; 
-    -webkit-transform:rotate(0deg); 
-    transform:rotate(0deg); 
-    opacity:1;
+    left: 59%;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    opacity: 1;
   }
+
   100% {
-    left:100%;
-    -webkit-transform:rotate(-180deg); 
-    transform:rotate(-180deg); 
-    opacity:0;
+    left: 100%;
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    opacity: 0;
   }
 }
 
 @-o-keyframes move {
   0% {
-    left:0; 
-    opacity:0;
+    left: 0;
+    opacity: 0;
   }
+
   35% {
-    left:41%; 
-    -o-transform:rotate(0deg); 
-    transform:rotate(0deg); 
-    opacity:1;
+    left: 41%;
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    opacity: 1;
   }
+
   65% {
-    left:59%; 
-    -o-transform:rotate(0deg); 
-    transform:rotate(0deg); 
-    opacity:1;
+    left: 59%;
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    opacity: 1;
   }
+
   100% {
-    left:100%; 
-    -o-transform:rotate(-180deg); 
-    transform:rotate(-180deg); 
-    opacity:0;
+    left: 100%;
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    opacity: 0;
   }
 }
 
 #content {
   display: none;
 }
+
 .slide-up {
-  transform: translateY(-100%); /* 初期位置を画面外に設定 */
+  transform: translateY(-100%);
+  /* 初期位置を画面外に設定 */
 }
 
 
 
+.gotop {
+  position: relative;
+  bottom: 300px;
+  text-align: center;
+  box-shadow: 6px 4px 3px #1c3a4e;
+  background-color: #dbdee0;
+  color: #1b1818;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* ホバー時のスタイルを追加 */
+.gotop:hover {
+  background-color: #8bbee1;
+}
