@@ -33,6 +33,9 @@ canvas {
   color: rgba(190, 206, 231, 0.3);
 }
 
+h2 p {
+  line-height: 2.0;
+}
 
 
 
