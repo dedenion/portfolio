@@ -37,6 +37,20 @@ h2 p {
   line-height: 2.0;
 }
 
+.text-box {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: #eff2f1;
+  text-shadow: 1px 1px 1px #6e6868,
+      1px 2px 1px #706b6b,
+
+      
+  1px 18px 7px rgba(114, 109, 109, 0.4),
+  
+  
+  1px 10px 100px rgba(239, 234, 234, 0.4);
+}
+
 
 
 main {
@@ -97,6 +111,8 @@ a {
     opacity: 0;
   }
 }
+
+
 
 .slider {
   width: 40px; /* スライダーサイズを大きく */

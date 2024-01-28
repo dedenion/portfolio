@@ -167,15 +167,15 @@ function hideHoverText() {
       </script>
       
       
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        // ScrollRevealの初期化
-        ScrollReveal({ reset: true, distance: "80px", duration: 1000 });
-      
-        // .fade-in クラスを持つ要素をフェードインさせる
-        ScrollReveal().reveal('.fade-in', { delay: 1000 });
-      });
-  </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          // ScrollRevealの初期化
+          ScrollReveal({ reset: true, distance: "20px", duration: 1000, easing: 'ease-in-out', origin: 'bottom' });
+        
+          // .fade-in クラスを持つ要素をフェードインさせる
+          ScrollReveal().reveal('.fade-in', { delay: 200 });
+        });
+      </script>
   <script>
     let isAutoScrolling = false;
 let scrollInterval;
